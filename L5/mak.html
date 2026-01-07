@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE | Modern Event Planning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Color Variables --- */
+        :root {
+            --primary-gold: #c6a664;
+            --dark-charcoal: #1c1c1c;
+            --light-cream: #f9f9f9;
+            --text-color: #333;
+        }
+
+        /* --- Global Reset and Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Modern, clean font */
+        }
+
+        body {
+            background: var(--light-cream);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px; /* Slightly taller header */
+            background: rgba(255, 255, 255, 0.95); /* Light background for visibility */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 0 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        header h1 {
+            color: var(--dark-charcoal);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        header h1 span {
+            color: var(--primary-gold);
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--dark-charcoal);
+            margin-left: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        /* Underline effect for navigation */
+        nav button::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gold);
+            transition: width 0.3s;
+        }
+
+        nav button:hover::after {
+            width: 100%;
+        }
+
+        /* --- Sections & Layouts --- */
+        section {
+            padding: 120px 80px;
+            min-height: 80vh;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 70px;
+            color: var(--dark-charcoal);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-gold);
+            margin: 15px auto 0;
+        }
+        
+        /* --- Hero Section (Full-screen, High-Impact) --- */
+        .hero {
+            height: 100vh;
+            padding-top: 90px;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+                url("https://images.unsplash.com/photo-1542435503-921c5831f0e4?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+                center / cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-content h2 {
+            font-size: 4.5em; /* Large, bold title */
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5em;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-gold);
+            color: var(--dark-charcoal);
+            text-decoration: none;
+            padding: 15px 40px;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+            text-transform: uppercase;
+        }
+
+        .cta-button:hover {
+            background: #d7b575;
+            transform: translateY(-2px);
+        }
+
+        /* --- About Section (Testimonials Integration) --- */
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            text-align: left;
+        }
+        .about-text p {
+            margin-bottom: 25px;
+        }
+
+        .testimonial-card {
+            flex: 1;
+            padding: 30px;
+            background: #fff;
+            border-left: 5px solid var(--primary-gold);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            font-style: italic;
+        }
+        .testimonial-card p:last-child {
+            font-style: normal;
+            font-weight: 600;
+            margin-top: 15px;
+            color: var(--primary-gold);
+        }
+
+        /* --- Services Section (Grid) --- */
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: #fff;
+            border-top: 5px solid var(--primary-gold);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .card h4 {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom Service Form Styles */
+        #add-custom-service {
+            padding: 30px;
+            border: 2px dashed var(--primary-gold);
+            background: #fff;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+        #custom-service-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        #custom-service-name {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #add-custom-service button {
+            padding: 12px 20px;
+            background: var(--dark-charcoal);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #add-custom-service button:hover {
+            background: #444;
+        }
+
+
+        /* Service Details (Integrated Layout) */
+        .service-detail {
+            display: none;
+            max-width: 1200px;
+            margin: 50px auto 0;
+            padding: 40px;
+            background: #fff;
+            border-left: 5px solid var(--primary-gold);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-content {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .detail-text {
+            flex: 1;
+        }
+
+        .detail-images {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .detail-images img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* --- Contact Section --- */
+        .contact {
+            background: var(--dark-charcoal);
+            color: #fff;
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: #fff;
+        }
+
+        .contact form {
+            max-width: 500px;
+            margin: auto;
+            text-align: left;
+        }
+
+        .contact input, 
+        .contact textarea, 
+        .contact button.submit {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .contact input, 
+        .contact textarea {
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+        }
+
+        .contact textarea {
+            min-height: 150px;
+        }
+
+        .contact button.submit {
+            background: var(--primary-gold);
+            border: none;
+            color: var(--dark-charcoal);
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact button.submit:hover {
+            background: #d7b575;
+        }
+
+        /* Submitted contact details */
+        #contact-list {
+            max-width: 500px;
+            margin: 40px auto 0;
+            background: #333;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: left;
+            border-top: 3px solid var(--primary-gold);
+        }
+
+        #contact-list h4 {
+            margin-bottom: 15px;
+            color: var(--primary-gold);
+            font-size: 1.1em;
+        }
+
+        #contact-list div {
+            margin-bottom: 15px;
+            color: #ccc;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #555;
+        }
+        
+        /* --- Footer --- */
+        footer {
+            background: var(--dark-charcoal);
+            color: #aaa;
+            text-align: center;
+            padding: 30px 80px;
+            font-size: 0.9em;
+            border-top: 1px solid #333;
+        }
+        footer .info-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        footer a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        #visit-count-display {
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 1024px) {
+            header {
+                padding: 0 30px;
+            }
+            section {
+                padding: 100px 30px;
+            }
+            .hero-content h2 {
+                font-size: 3.5em;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+            .testimonial-card {
+                margin-top: 30px;
+                max-width: 100%;
+            }
+            .detail-content {
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 768px) {
+            header {
+                height: 120px;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+            nav {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav button {
+                margin: 5px 10px;
+            }
+            .hero-content h2 {
+                font-size: 2.5em;
+            }
+            .hero-content p {
+                font-size: 1.2em;
+            }
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 50px;
+            }
+            footer .info-line {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 onclick="goTo('home')">MAK<span>LUXE</span></h1>
+    <nav>
+        <button onclick="goTo('home')">Home</button>
+        <button onclick="goTo('about')">About</button>
+        <button onclick="goTo('services')">Services</button>
+        <button onclick="goTo('contact')">Contact</button>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h2>Curating Moments. Designing Memories.</h2>
+        <p>Luxury Event Planning & Design for Weddings, Galas, and Corporate Ventures.</p>
+        <a href="#services" class="cta-button" onclick="goTo('services')">Explore Our Offerings</a>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <h3 class="section-title">The MAK LUXE Difference</h3>
+    <div class="about-content">
+        <div class="about-text">
+            <p>
+                MAK LUXE is driven by a commitment to flawless execution and innovative design. We manage every single detail, from initial concept development to final guest departure, ensuring a smooth, stress-free, and spectacular event.
+            </p>
+            <p>
+                Our philosophy centers on personalized service. We take the time to deeply understand your vision, transforming it into a luxurious reality that exceeds all expectations.
+            </p>
+            <a href="#contact" class="cta-button" onclick="goTo('contact')">Book a Consultation</a>
+        </div>
+        
+        <div class="testimonial-card">
+            <p>"Working with MAK LUXE was the best decision we made. The entire wedding process was elegant, organized, and truly breathtaking. They are masters of their craft."</p>
+            <p>— Sophia R. (Private Client)</p>
+        </div>
+    </div>
+</section>
+
+<section id="services">
+    <h3 class="section-title">Our Bespoke Event Services</h3>
+    <div class="services-container">
+        
+        <div id="services-grid" class="services-grid">
+            </div>
+
+        <div id="add-custom-service">
+            <p style="margin-bottom: 15px; font-weight: 600; color: var(--text-color);">Have a unique vision? Submit your custom service request.</p>
+            <form id="custom-service-form">
+                <input type="text" placeholder="e.g., Destination Retreat Planning" id="custom-service-name" required>
+                <button type="submit">Submit Idea</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="wedding" class="service-detail">
+        <h3>Full-Service Wedding Planning</h3>
+        <div class="detail-content">
+            <div class="detail-text">
+                <p>We provide end-to-end luxury wedding planning, including exclusive venue sourcing, detailed budget management, high-end vendor negotiation, custom decor design, and on-site flawless execution.</p>
+                <ul>
+                    <li>Venue Scouting & Negotiation</li>
+                    <li>Catering & Beverage Program Management</li>
+                    <li>Guest List & RSVP Tracking</li>
+                    <li>Rehearsal Dinner Coordination</li>
+                </ul>
+            </div>
+            <div class="detail-images">
+                <img src="https://images.unsplash.com/photo-1536991307684-25cb432d8474" alt="Elegant wedding cake display">
+                <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1" alt="Formal dining setting for wedding guests">
+            </div>
+        </div>
+    </div>
+
+    <div id="corporate" class="service-detail">
+        <h3>Executive Corporate Events</h3>
+        <div class="detail-content">
+            <div class="detail-text">
+                <p>From high-profile product launches and annual shareholder meetings to exclusive C-suite retreats, we ensure your brand message is delivered with polish and impact in a sophisticated setting.</p>
+                <ul>
+                    <li>Product Launch Management</li>
+                    <li>Gala Dinner & Awards Ceremony Production</li>
+                    <li>Vendor Logistics & Technical Production</li>
+                    <li>Branding Integration & Design</li>
+                </ul>
+            </div>
+            <div class="detail-images">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87" alt="Professional corporate conference setup">
+                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865" alt="High-end networking reception">
+            </div>
+        </div>
+    </div>
+
+    <div id="private" class="service-detail">
+        <h3>Private Celebrations & Galas</h3>
+        <div class="detail-content">
+            <div class="detail-text">
+                <p>We specialize in discreetly planning exceptional private parties, milestone birthdays, anniversaries, and exclusive charity galas, offering unparalleled levels of customization and privacy.</p>
+                <ul>
+                    <li>Themed Decor & Entertainment Sourcing</li>
+                    <li>Security & Discreet Management</li>
+                    <li>Custom Invitation Design & Mailing</li>
+                    <li>Post-Event Management</li>
+                </ul>
+            </div>
+            <div class="detail-images">
+                <img src="https://images.unsplash.com/photo-1515165562835-c4c8b7b07f3a" alt="Champagne flutes ready for a toast">
+                <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e" alt="Luxurious outdoor evening party setup">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <h3 class="section-title">Start Your Journey with MAK LUXE</h3>
+    <form id="contact-form">
+        <input type="text" placeholder="Full Name" id="name" required>
+        <input type="email" placeholder="Email Address" id="email" required>
+        <input type="text" placeholder="Event Type (e.g., Wedding, Gala, Conference)" id="eventType" required>
+        <textarea placeholder="Tell us about your event requirements and desired date" id="requirements"></textarea>
+        <button class="submit" type="submit">Submit Consultation Request</button>
+    </form>
+
+    <div id="contact-list">
+        <h4>Recent Submissions (Demo Data)</h4>
+    </div>
+</section>
+
+<footer>
+    <div class="info-line">
+        <span>© 2025 MAK LUXE Event Design | All Rights Reserved</span>
+        <span id="visit-count-display"></span>
+        <span>
+            Email: <a href="mailto:info@makluxe.com">info@makluxe.com</a> | Phone: +1 (555) 123-4567
+        </span>
+    </div>
+</footer>
+
+<script>
+// --- Configuration for Default Services ---
+const defaultServices = [
+    { id: 'wedding', name: 'Luxury Wedding Planning', detail: document.getElementById('wedding') },
+    { id: 'corporate', name: 'Executive Corporate Events', detail: document.getElementById('corporate') },
+    { id: 'private', name: 'Private Celebrations & Galas', detail: document.getElementById('private') },
+];
+
+// --- Visitor Counter Logic (Local only) ---
+function trackAndDisplayVisits() {
+    let count = parseInt(localStorage.getItem('makEventsVisitCount')) || 0;
+    count++;
+    localStorage.setItem('makEventsVisitCount', count);
+    document.getElementById('visit-count-display').textContent = `Local Visits: ${count}`;
+}
+
+
+// --- Initial Load: Load saved data ---
+document.addEventListener('DOMContentLoaded', function() {
+    loadContactsFromStorage();
+    loadServicesFromStorage();
+    trackAndDisplayVisits();
+});
+
+// --- Navigation and Scrolling ---
+function goTo(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+    const headerOffset = 90; // Adjusted for new header height
+    const offsetPosition = section.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+    });
+}
+
+// --- Service Logic ---
+
+// Function to dynamically create a service card
+function createServiceCard(service) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<h4>${service.name}</h4><p style="font-size:0.9em; margin-top: 5px; color:#888;">View Details</p>`;
+    
+    if (service.isCustom) {
+        card.onclick = () => showCustomServiceDetail(service);
+    } else {
+        card.onclick = () => showServiceDetail(service.id);
+    }
+    return card;
+}
+
+function hideAllDetails() {
+    const details = document.querySelectorAll('.service-detail');
+    details.forEach(d => d.style.display = 'none');
+    const customDetail = document.getElementById('custom-service-detail');
+    if (customDetail) {
+        customDetail.style.display = 'none';
+    }
+}
+
+// Displays a standard service detail
+function showServiceDetail(serviceId) {
+    hideAllDetails();
+    const targetDetail = document.getElementById(serviceId);
+    if (targetDetail) {
+        targetDetail.style.display = 'block';
+        // Scroll to the detail section, not the top of the 'services' section
+        targetDetail.scrollIntoView({behavior: 'smooth'}); 
+        const headerOffset = 90;
+        window.scrollBy(0, -headerOffset); // Adjust for fixed header
+    }
+}
+
+// Displays a generic detail view for a custom service
+function showCustomServiceDetail(service) {
+    hideAllDetails();
+    let customDetail = document.getElementById('custom-service-detail');
+    if (!customDetail) {
+        customDetail = document.createElement('div');
+        customDetail.id = 'custom-service-detail';
+        customDetail.className = 'service-detail';
+        document.getElementById('services').appendChild(customDetail);
+    }
+    
+    // Populate the detail content
+    customDetail.innerHTML = `<h3>${service.name} (Custom Vision)</h3>
+                              <p>Thank you for submitting your custom event vision. A specialist from MAK LUXE will contact you within 24 hours to discuss the details and next steps.</p>
+                              <p style="margin-top: 20px; font-weight: bold;">We look forward to creating something exceptional with you.</p>`;
+    customDetail.style.display = 'block';
+    customDetail.scrollIntoView({behavior: 'smooth'});
+    const headerOffset = 90;
+    window.scrollBy(0, -headerOffset); // Adjust for fixed header
+}
+
+// Renders all services (default + custom)
+function renderAllServices(customServices = []) {
+    const grid = document.getElementById('services-grid');
+    grid.innerHTML = ''; // Clear existing cards
+
+    // Render default services
+    defaultServices.forEach(service => {
+        grid.appendChild(createServiceCard(service));
+    });
+
+    // Render custom services
+    customServices.forEach(service => {
+        grid.appendChild(createServiceCard(service));
+    });
+}
+
+// Load custom services from LocalStorage
+function loadServicesFromStorage() {
+    const storedCustomServices = JSON.parse(localStorage.getItem('makEventsCustomServices')) || [];
+    renderAllServices(storedCustomServices);
+}
+
+// Handle custom service submission
+document.getElementById('custom-service-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nameInput = document.getElementById('custom-service-name');
+    const serviceName = nameInput.value.trim();
+
+    if (serviceName) {
+        const newService = {
+            id: 'custom-' + Date.now(),
+            name: serviceName,
+            isCustom: true
+        };
+
+        const customServices = JSON.parse(localStorage.getItem('makEventsCustomServices')) || [];
+        customServices.push(newService);
+        localStorage.setItem('makEventsCustomServices', JSON.stringify(customServices));
+
+        renderAllServices(customServices);
+        nameInput.value = '';
+        
+        // Show the custom service detail immediately after adding it
+        showCustomServiceDetail(newService);
+    }
+});
+
+// --- Contact Form Logic (Enhanced for Persistence) ---
+
+// Function to display a single contact object
+function displayContact(contact) {
+    const contactList = document.getElementById('contact-list');
+    const div = document.createElement('div');
+    div.innerHTML = `<strong>${contact.name}</strong> (${contact.email})<br>
+                     Event: ${contact.eventType} | <span style="font-style:italic;">"${contact.requirements.substring(0, 50)}..."</span>`;
+    contactList.appendChild(div);
+}
+
+// Function to load all contacts from LocalStorage and display them
+function loadContactsFromStorage() {
+    const contactList = document.getElementById('contact-list');
+    // Clear the list before loading (only keep the <h4>Submitted Contacts</h4>)
+    while (contactList.children.length > 1) {
+        contactList.removeChild(contactList.lastChild);
+    }
+    
+    const storedContacts = JSON.parse(localStorage.getItem('makEventsContacts')) || [];
+    // Only show the last few submissions for the demo list
+    storedContacts.slice(-3).forEach(contact => {
+        displayContact(contact);
+    });
+
+    if (storedContacts.length === 0) {
+        contactList.innerHTML += '<p style="color:#aaa;">No contacts submitted yet.</p>';
+    }
+}
+
+
+// Handle contact form submission
+document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const eventType = document.getElementById('eventType').value;
+    const requirements = document.getElementById('requirements').value;
+
+    const newContact = {
+        name: name,
+        email: email,
+        eventType: eventType,
+        requirements: requirements
+    };
+
+    const contacts = JSON.parse(localStorage.getItem('makEventsContacts')) || [];
+    contacts.push(newContact);
+    localStorage.setItem('makEventsContacts', JSON.stringify(contacts));
+    
+    // Reload and display the updated list
+    loadContactsFromStorage();
+
+    alert("Thank you! Your consultation request has been submitted. A specialist will be in touch shortly.");
+
+    document.getElementById('contact-form').reset();
+    
+    document.getElementById('contact-list').scrollIntoView({behavior: 'smooth'});
+});
+</script>
+
+</body>
+</html>
